@@ -23,6 +23,16 @@ public class PedidoDAO {
     //Manipular o banco de dados
     private Statement stmt = null;
     
+    private Float calculoChapaBranca;
+    private Float calculoChapaCor;
+    private Float calculoFita;
+    private Float calculo_fita;
+    private Float calculo_cola;
+    private Float calculoparafuso;
+    private Float calculodias;
+    private Float calculofrete;
+    
+    
     
     public  boolean inserirPedido(PedidoDTO pedidoDTO){
         try {
@@ -158,4 +168,30 @@ public class PedidoDAO {
         }
         
     }//fecha excluirCliente
+    
+    
+    public String CalculoPedido(PedidoDTO pedidoDTO){
+        String mensagem;
+        float total;
+        
+        calculoChapaBranca= pedidoDTO.getChapaBranca_p() * 250;
+        calculoChapaCor = pedidoDTO.getChapaCor_p() * 400;
+        calculoFita = pedidoDTO.getFita_p() * 100;
+        calculo_cola = pedidoDTO.getCola_p() * 50;
+        calculoparafuso = pedidoDTO.getParafuso_p() * 10;
+        calculodias = pedidoDTO.getDias_p() * 100;
+        
+        total= calculoChapaBranca + calculoChapaCor + calculoFita + calculo_cola + calculoparafuso + calculodias + pedidoDTO.getFrete_p();
+        
+        mensagem = "Quantidade: | Preço\n" +
+        "ChapaBranca: | " + pedidoDTO.getChapaBranca_p() + " | " + calculoChapaBranca + "\n" +
+        "ChapaCor: | " + pedidoDTO.getChapaCor_p() + " | " + calculoChapaCor + "\n" +
+        "Fita: | " + pedidoDTO.getFita_p() + " | " + calculoFita + "\n" +
+        "Cola: | " + pedidoDTO.getCola_p() + " | " + calculo_cola + "\n" +
+        "Parafuso: | " + pedidoDTO.getParafuso_p() + " | " + calculoparafuso + "\n" +
+        "Dias: | " + pedidoDTO.getDias_p() + " | " + calculodias + "\n\n" +
+        "Preço Sugerido: R$" + (total*2);
+        
+        return mensagem;
+    }
 }

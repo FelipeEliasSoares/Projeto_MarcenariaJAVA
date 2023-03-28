@@ -71,6 +71,10 @@ public class PedidoCTR {
         }
     }//fecha o metado excluirCliente
     
+    public String CalculoPedido(PedidoDTO pedidoDTO){
+        return pedidoDAO.CalculoPedido(pedidoDTO);
+    }
+    
     public  void CloseDB(){
         conexaoDAO.CloseDB();
     }//fecha metada closeDB

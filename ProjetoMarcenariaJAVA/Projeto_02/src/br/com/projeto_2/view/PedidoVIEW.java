@@ -51,14 +51,16 @@ public class PedidoVIEW extends javax.swing.JInternalFrame {
     }//Fecha limpaCampos
      
     
-    private void liberaBotoes(boolean a, boolean  b, boolean c, boolean  d, boolean e){
+    private void liberaBotoes(boolean a, boolean  b, boolean c, boolean  d, boolean e,boolean f){
         btnNovo.setEnabled(a);
         btnSalvar.setEnabled(b);
         btnCancelar.setEnabled(c);
         btnExcluir.setEnabled(d);
         btnSair.setEnabled(e);
-    
+        btnMonstra.setEnabled(f);
     }
+    
+
     
     
        private void gravar(){
@@ -92,7 +94,7 @@ public class PedidoVIEW extends javax.swing.JInternalFrame {
         
         liberaCampos(false);
         
-        liberaBotoes(true, false, false, false, true);
+        liberaBotoes(true, false, false, false, true,false);
         modelo_jtl_consultar_cliente = (DefaultTableModel) jtl_consultar_cliente.getModel();
     }
 
@@ -308,6 +310,11 @@ public class PedidoVIEW extends javax.swing.JInternalFrame {
         });
 
         btnMonstra.setText("Monstrar PREÇO");
+        btnMonstra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonstraActionPerformed(evt);
+            }
+        });
 
         jtl_consultar_cliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -450,7 +457,6 @@ public class PedidoVIEW extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(chapaBranca_p, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -510,7 +516,7 @@ public class PedidoVIEW extends javax.swing.JInternalFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         liberaCampos(true);
-        liberaBotoes(false, true, true, true, true);
+        liberaBotoes(false, true, true, true, true,true);
         gravar_alterar =1;
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -531,7 +537,7 @@ public class PedidoVIEW extends javax.swing.JInternalFrame {
         
         limpaCampos();
         liberaCampos(false);
-        liberaBotoes(true, false, false, false, true);
+        liberaBotoes(true, false, false, false, true,true);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void cola_pActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cola_pActionPerformed
@@ -553,14 +559,14 @@ public class PedidoVIEW extends javax.swing.JInternalFrame {
     private void jtl_consultar_clienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtl_consultar_clienteMouseClicked
         preencheCampos(Integer.parseInt(String.valueOf(jtl_consultar_cliente.getValueAt(
                 jtl_consultar_cliente.getSelectedRow(), 0))));
-        liberaBotoes(false, true, true, true, true);
+        liberaBotoes(false, true, true, true, true,true);
     }//GEN-LAST:event_jtl_consultar_clienteMouseClicked
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         excluir();
         limpaCampos();
         liberaCampos(false);
-        liberaBotoes(true,false,false,false,true);
+        liberaBotoes(true,false,false,false,true,false);
         modelo_jtl_consultar_cliente.setNumRows(0);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -568,13 +574,27 @@ public class PedidoVIEW extends javax.swing.JInternalFrame {
         limpaCampos();
         liberaCampos(false);
         modelo_jtl_consultar_cliente.setNumRows(0);
-        liberaBotoes(true, false, false, false, true);
+        liberaBotoes(true, false, false, false, true,false);
         gravar_alterar=0;
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnMonstraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonstraActionPerformed
+        pedidoDTO.setChapaBranca_p(Float.parseFloat(chapaBranca_p.getText()));
+        pedidoDTO.setChapaCor_p(Float.parseFloat(chapaCor_p.getText()));
+        pedidoDTO.setFita_p(Float.parseFloat(fita_p.getText()));
+        pedidoDTO.setCola_p(Float.parseFloat(cola_p.getText()));
+        pedidoDTO.setParafuso_p(Float.parseFloat(parafuso_p.getText()));
+        pedidoDTO.setDias_p(Float.parseFloat(dias_p.getText()));
+        pedidoDTO.setFrete_p(Float.parseFloat(frete_p.getText()));
+        
+        JOptionPane.showMessageDialog(null, pedidoCTR.CalculoPedido(pedidoDTO));
+        
+        liberaBotoes(true, false, false, false, true,true);
+    }//GEN-LAST:event_btnMonstraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

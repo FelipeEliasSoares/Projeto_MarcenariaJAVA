@@ -190,6 +190,7 @@ public class PedidoDAO {
         "Cola: | " + pedidoDTO.getCola_p() + " | " + calculo_cola + "\n" +
         "Parafuso: | " + pedidoDTO.getParafuso_p() + " | " + calculoparafuso + "\n" +
         "Dias: | " + pedidoDTO.getDias_p() + " | " + calculodias + "\n\n" +
+        "Preço de Custo: R$" + total + "\n"+       
         "Preço Sugerido: R$" + (total*2);
         
         return mensagem;

@@ -21,7 +21,7 @@ public class conexaoDAO {
     public  static void ConectDB(){
         try {
             //Dados para conectar com o banco de dados Postgres
-            String dsn = "projeto_2";
+            String dsn = "projeto_marcenaria";
             String user = "postgres";
             String senha = "postdba";
             
